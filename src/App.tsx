@@ -16,6 +16,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {WelcomeScreen} from '@pages/WelcomeScreen/WelcomeScreen.tsx';
+import {Settings} from '@pages/Settings/Settings.tsx';
 import TabBar from '@components/combinedComponents/TabBar.tsx';
 
 const Stack = createStackNavigator();
@@ -60,6 +61,11 @@ function App(): React.JSX.Element {
 							options={{headerShown: false}}
 						/>
 					</Stack.Navigator>
+					<Stack.Screen
+						name="TabNavigation"
+						component={TabNavigation}
+						options={{headerShown: false}}
+					/>
 				</SafeAreaView>
 			</NavigationContainer>
 		</>
