@@ -14,9 +14,29 @@ import {
 } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {WelcomeScreen} from '@pages/WelcomeScreen/WelcomeScreen.tsx';
+import TabBar from '@components/combinedComponents/TabBar.tsx';
 
 const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
+
+export const TabNavigation = () => {
+	return (
+		<Tab.Navigator tabBar={props => <TabBar {...props} />}>
+			<Tab.Screen
+				name="Home"
+				component={WelcomeScreen}
+				options={{headerShown: false}}
+			/>
+			<Tab.Screen
+				name="Setting"
+				component={Settings}
+				options={{headerShown: false}}
+			/>
+		</Tab.Navigator>
+	);
+};
 function App(): React.JSX.Element {
 	const isDarkMode = useColorScheme() === 'dark';
 
