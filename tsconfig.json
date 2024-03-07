@@ -11,6 +11,9 @@
       ],
       "@icons/*": [
         "assets/icons/*"
+      ],
+      "@images/*": [
+        "assets/images/*"
       ]
     }
   }

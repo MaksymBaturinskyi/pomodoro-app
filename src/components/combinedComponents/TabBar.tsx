@@ -13,7 +13,10 @@ const TabBar = ({state, descriptors, navigation}: any) => {
 				paddingHorizontal: 50,
 				paddingTop: 12,
 				paddingBottom: 8,
+				height: 50,
+				backgroundColor: colors.main,
 				justifyContent: 'space-between',
+				alignItems: 'center',
 				borderTopWidth: 1,
 				borderTopColor: colors.greyBorder,
 			}}>
@@ -23,9 +26,8 @@ const TabBar = ({state, descriptors, navigation}: any) => {
 				const isActive = state.index === index;
 
 				const Icon = () => {
-					const color = isActive ? colors.textBlack : colors.textGrey;
-					if (label === 'Home') return <Home fill={color} />;
-					if (label === 'Settings') return <Settings fill={color} />;
+					if (label === 'Home') return <Home />;
+					if (label === 'Settings') return <Settings />;
 					return null;
 				};
 

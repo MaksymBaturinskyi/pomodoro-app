@@ -1,6 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, TouchableOpacity} from 'react-native';
-import {colors} from '@components/colors.ts';
+import {StyleSheet, TouchableOpacity} from 'react-native';
 
 interface TabBarButtonWithIconProps {
 	icon: React.FC;
@@ -15,24 +14,24 @@ const TabBarButtonWithIcon = ({
 	isActive,
 	onPress,
 }: TabBarButtonWithIconProps) => {
-	const titleTextStyle = {
-		...styles.titleText,
-		color: isActive ? colors.textBlack : colors.textGrey,
+	const button = {
+		...styles.button,
+		backgroundColor: isActive ? 'rgb(255,255,255, 0.6)' : 'transparent',
 	};
 
 	return (
-		<TouchableOpacity onPress={onPress}>
+		<TouchableOpacity onPress={onPress} style={button}>
 			<Icon />
-			<Text style={titleTextStyle}>{label}</Text>
 		</TouchableOpacity>
 	);
 };
 
 const styles = StyleSheet.create({
-	titleText: {
-		marginTop: 8,
-		fontSize: 20,
-		fontWeight: 'bold',
+	button: {
+		width: 34,
+		height: 34,
+		padding: 4,
+		borderRadius: 8,
 	},
 });
 

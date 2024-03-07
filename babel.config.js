@@ -9,6 +9,7 @@ module.exports = {
 					'@components': './src/components',
 					'@pages': './src/pages',
 					'@icons': './assets/icons',
+					'@images': './assets/images',
 				},
 			},
 		],

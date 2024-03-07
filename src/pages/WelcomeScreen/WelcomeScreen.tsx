@@ -1,22 +1,63 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {
+	ImageBackground,
+	StyleSheet,
+	Text,
+	TouchableOpacity,
+	View,
+} from 'react-native';
+import {colors} from '@components/colors.ts';
+import bg from '@images/bg.png';
+import {useNavigation} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
 
+type NavigationType = StackNavigationProp<RootStackParamList, 'Dashboard'>;
 export const WelcomeScreen = () => {
-	// const navigation = useNavigation();
-	// const handleNavigate = async () => {
-	// 	navigation.navigate('Tutorial');
-	// };
+	const navigation = useNavigation<NavigationType>();
+	const handleNavigate = async () => {
+		navigation.navigate('Dashboard');
+	};
 
 	return (
-		<View
-			style={{
-				width: '100%',
-				flex: 1,
-				paddingTop: 90,
-				alignItems: 'center',
-				position: 'relative',
-			}}>
-			<Text style={{color: '#000'}}>Welcome</Text>
+		<View style={{flex: 1, backgroundColor: colors.main}}>
+			<ImageBackground source={bg} resizeMode="contain" style={styles.image}>
+				<Text style={styles.title}>Plan your work and stay productive</Text>
+				<TouchableOpacity style={styles.button} onPress={handleNavigate}>
+					<Text
+						style={{color: colors.textWhite, fontSize: 18, fontWeight: '600'}}>
+						Get started
+					</Text>
+				</TouchableOpacity>
+			</ImageBackground>
 		</View>
 	);
 };
+
+const styles = StyleSheet.create({
+	image: {
+		flex: 1,
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+	title: {
+		position: 'absolute',
+		top: 30,
+		color: colors.textWhite,
+		fontSize: 24,
+		fontWeight: '700',
+		textAlign: 'center',
+		paddingHorizontal: 20,
+	},
+	button: {
+		position: 'absolute',
+		bottom: 50,
+		width: 300,
+		color: colors.textWhite,
+		alignItems: 'center',
+		marginTop: 20, // Add space between the title and the button
+		padding: 20, // Padding inside the button
+		backgroundColor: 'purple', // Background color for the button
+		borderRadius: 20, // Rounded corners for the button
+		// Add more styling for the button
+	},
+});
