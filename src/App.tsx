@@ -49,7 +49,7 @@ function App(): React.JSX.Element {
 			<NavigationContainer>
 				<SafeAreaView style={backgroundStyle}>
 					<StatusBar
-						barStyle={isDarkMode ? 'light-content' : 'dark-content'}
+						barStyle={'light-content'}
 						backgroundColor={backgroundStyle.backgroundColor}
 					/>
 					<Stack.Navigator initialRouteName="WelcomeScreen">
