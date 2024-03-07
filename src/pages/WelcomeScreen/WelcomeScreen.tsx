@@ -54,10 +54,9 @@ const styles = StyleSheet.create({
 		width: 300,
 		color: colors.textWhite,
 		alignItems: 'center',
-		marginTop: 20, // Add space between the title and the button
-		padding: 20, // Padding inside the button
-		backgroundColor: 'purple', // Background color for the button
-		borderRadius: 20, // Rounded corners for the button
-		// Add more styling for the button
+		marginTop: 20,
+		padding: 20,
+		backgroundColor: 'purple',
+		borderRadius: 20,
 	},
 });

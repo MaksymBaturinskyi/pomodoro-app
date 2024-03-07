@@ -10,15 +10,13 @@ const TabBar = ({state, descriptors, navigation}: any) => {
 		<View
 			style={{
 				flexDirection: 'row',
-				paddingHorizontal: 50,
+				paddingHorizontal: 100,
 				paddingTop: 12,
 				paddingBottom: 8,
 				height: 50,
 				backgroundColor: colors.main,
 				justifyContent: 'space-between',
 				alignItems: 'center',
-				borderTopWidth: 1,
-				borderTopColor: colors.greyBorder,
 			}}>
 			{state.routes.map((route: any, index: any) => {
 				const {options} = descriptors[route.key];

@@ -4,7 +4,13 @@ import {colors} from '@components/colors.ts';
 
 export const Settings = () => {
 	return (
-		<View style={{backgroundColor: colors.main, flex: 1}}>
+		<View
+			style={{
+				flex: 1,
+				justifyContent: 'center',
+				alignItems: 'center',
+				backgroundColor: colors.main,
+			}}>
 			<Text style={{color: colors.textWhite}}>Settings</Text>
 		</View>
 	);
