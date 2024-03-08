@@ -6,21 +6,39 @@ import {CountdownCircleTimer} from 'react-native-countdown-circle-timer';
 import {colors} from '@components/colors.ts';
 import {EnumStatus} from '@pages/Home/Timer/timer.interface.ts';
 
-const flowDuration = 1 * 60;
+const flowDuration = 1 * 10;
 const sessionCount = 7;
-const breakDuration = 1 * 60;
+const breakDuration = 1 * 10;
 
 export const Timer = () => {
 	const [isPlaying, setIsPlaying] = useState(false);
-	const [currentSession, setCurrentSession] = useState(7);
-	const [status, setStatus] = useState<EnumStatus>(EnumStatus.REST);
+	const [currentSession, setCurrentSession] = useState(1);
+	const [key, setKey] = useState(0);
+
+	const getStatus = (session: number) =>
+		session % 2 === 0 ? EnumStatus.REST : EnumStatus.WORK;
+
+	const startNextSession = () => {
+		if (currentSession < sessionCount * 2) {
+			setCurrentSession(prev => prev + 1);
+			setIsPlaying(true);
+			setKey(prev => prev + 1);
+		} else {
+			setIsPlaying(false);
+		}
+	};
+
+	const isWorkSession = getStatus(currentSession) === EnumStatus.WORK;
+	const duration = isWorkSession ? flowDuration : breakDuration;
+	const statusText = isWorkSession ? 'WORK' : 'REST';
 	return (
 		<View style={styles.container}>
 			<CountdownCircleTimer
+				key={key}
 				isPlaying={isPlaying}
-				duration={flowDuration}
+				duration={duration}
 				colors={['#3A3570', '#ffffff']}
-				colorsTime={[7, 0]}
+				colorsTime={[flowDuration, 0]}
 				size={300}
 				strokeWidth={10}
 				trailColor={'#2f2f4c'}
@@ -29,8 +47,8 @@ export const Timer = () => {
 					const progress = (elapsedTime / totalTime) * 100;
 				}}
 				onComplete={() => {
-					setIsPlaying(false);
-					return {shouldRepeat: false, delay: 1};
+					startNextSession();
+					return {shouldRepeat: false};
 				}}>
 				{({remainingTime}) => {
 					const minutes = Math.floor(remainingTime / 60);
@@ -44,9 +62,7 @@ export const Timer = () => {
 							<Text style={styles.timerText}>
 								{`${padTime(minutes)}:${padTime(seconds)}`}
 							</Text>
-							<Text style={styles.statusText}>
-								{status === EnumStatus.REST ? 'REST' : 'WORK'}
-							</Text>
+							<Text style={styles.statusText}>{statusText}</Text>
 						</>
 					);
 				}}
