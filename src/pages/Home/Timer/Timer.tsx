@@ -6,20 +6,22 @@ import {CountdownCircleTimer} from 'react-native-countdown-circle-timer';
 import {colors} from '@components/colors.ts';
 import {EnumStatus} from '@pages/Home/Timer/timer.interface.ts';
 
-const flowDuration = 1 * 10;
-const sessionCount = 7;
-const breakDuration = 1 * 10;
+const flowDuration = 1 * 5;
+const sessionCount = 3;
+const breakDuration = 1 * 3;
 
 export const Timer = () => {
 	const [isPlaying, setIsPlaying] = useState(false);
 	const [currentSession, setCurrentSession] = useState(1);
 	const [key, setKey] = useState(0);
 
-	const getStatus = (session: number) =>
-		session % 2 === 0 ? EnumStatus.REST : EnumStatus.WORK;
+	const getStatus = (session: number) => {
+		if (session > sessionCount) return EnumStatus.END;
+		return session % 2 === 0 ? EnumStatus.REST : EnumStatus.WORK;
+	};
 
 	const startNextSession = () => {
-		if (currentSession < sessionCount * 2) {
+		if (currentSession <= sessionCount) {
 			setCurrentSession(prev => prev + 1);
 			setIsPlaying(true);
 			setKey(prev => prev + 1);
@@ -28,9 +30,20 @@ export const Timer = () => {
 		}
 	};
 
+	const onPressPlayPause = () => {
+		if (getStatus(currentSession) === EnumStatus.END) {
+			setCurrentSession(1);
+			setKey(prev => prev + 1);
+			setIsPlaying(true);
+		} else {
+			setIsPlaying(prev => !prev);
+		}
+	};
+
 	const isWorkSession = getStatus(currentSession) === EnumStatus.WORK;
 	const duration = isWorkSession ? flowDuration : breakDuration;
-	const statusText = isWorkSession ? 'WORK' : 'REST';
+	// const statusText = isWorkSession ? 'WORK' : 'REST';
+	console.log(isWorkSession, 'isWOrkSession');
 	return (
 		<View style={styles.container}>
 			<CountdownCircleTimer
@@ -56,6 +69,7 @@ export const Timer = () => {
 
 					const padTime = (time: string | number) =>
 						time.toString().padStart(2, '0');
+					const statusText = getStatus(currentSession);
 
 					return (
 						<>
@@ -92,9 +106,7 @@ export const Timer = () => {
 				))}
 			</View>
 
-			<TouchableOpacity
-				style={styles.button}
-				onPress={() => setIsPlaying(!isPlaying)}>
+			<TouchableOpacity style={styles.button} onPress={onPressPlayPause}>
 				{isPlaying ? <Pause /> : <Play />}
 			</TouchableOpacity>
 		</View>
