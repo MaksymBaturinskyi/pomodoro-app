@@ -57,6 +57,6 @@ const styles = StyleSheet.create({
 		marginTop: 20,
 		padding: 20,
 		backgroundColor: 'purple',
-		borderRadius: 20,
+		borderRadius: 30,
 	},
 });
