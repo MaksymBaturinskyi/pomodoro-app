@@ -3,18 +3,12 @@ import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {colors} from '@components/colors.ts';
 import Pause from '@icons/pause.svg';
 import Play from '@icons/play.svg';
-import LinearGradient from 'react-native-linear-gradient';
 
 export const Timer = () => {
 	const [isPlaying, setIsPlaying] = useState(false);
 	return (
 		<View>
-			<LinearGradient
-				colors={['purple', 'transparent']}
-				start={{x: -1.5, y: 0.5}}
-				end={{x: 1, y: 1}}
-				style={styles.shadow}
-			/>
+			<View style={styles.shadow}></View>
 			<TouchableOpacity
 				style={styles.button}
 				onPress={() => setIsPlaying(!isPlaying)}>
@@ -36,7 +30,9 @@ const styles = StyleSheet.create({
 		width: 80,
 		height: 80,
 		borderRadius: 50,
-		opacity: 0.6,
+		opacity: 0.1,
+		backgroundColor: 'purple',
+		transform: [{translateX: -5}, {translateY: -5}],
 	},
 	button: {
 		display: 'flex',
