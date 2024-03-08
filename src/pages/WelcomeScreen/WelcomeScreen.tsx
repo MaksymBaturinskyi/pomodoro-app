@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		marginTop: 20,
 		padding: 20,
-		backgroundColor: 'purple',
+		backgroundColor: colors.primary,
 		borderRadius: 30,
 	},
 });

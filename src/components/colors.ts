@@ -1,9 +1,11 @@
 export const colors = {
 	main: '#1e1c2e',
+	primary: '#483285',
 	black: '#000000',
 	textBlack: '#1A1B27',
 	textBlack1: '#161616',
 	textGrey: '#6E6E73',
+	buttonInactive: '#2C2B3C',
 	textWhite: '#FFFFFF',
 	lightGrey: '#F2F3F6',
 	greyBorder: '#E4E7ED',
