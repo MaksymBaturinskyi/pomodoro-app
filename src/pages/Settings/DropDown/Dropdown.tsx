@@ -1,20 +1,20 @@
-import React from 'react';
+import React, {FC, PropsWithChildren} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {Picker} from '@react-native-picker/picker';
 import {colors} from '@components/colors.ts';
 
 interface IDropDown {
 	placeholder: string;
-	value: string | number;
-	onChange: (itemValue: string | number, index: number) => void;
+	value: any;
+	onChange: (itemValue: any, index: number) => void;
 }
 
-export const Dropdown = ({
+export const Dropdown: FC<PropsWithChildren<IDropDown>> = ({
 	placeholder,
 	value,
-	children,
 	onChange,
-}: IDropDown) => {
+	children,
+}) => {
 	return (
 		<View>
 			<Text style={styles.textPickerTitle}>{placeholder}</Text>
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
 		color: colors.textWhite,
 	},
 	picker: {
-		height: 120,
+		height: 130,
 		overflow: 'hidden',
 		justifyContent: 'center',
 	},

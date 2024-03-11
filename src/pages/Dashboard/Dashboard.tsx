@@ -1,6 +1,6 @@
 import React from 'react';
-import TabNavigationWrapper from '../../navigation/TabNavigationWrapper.tsx';
+import {TabNavigation} from '../../App.tsx';
 
 export const Dashboard = () => {
-	return <TabNavigationWrapper />;
+	return <TabNavigation />;
 };

@@ -3,10 +3,10 @@ import {StyleSheet, View} from 'react-native';
 import {colors} from '@components/colors.ts';
 import {Timer} from './Timer/Timer.tsx';
 
-export const Home = ({route}: any) => {
+export const Home = ({settings}: any) => {
 	return (
 		<View style={styles.container}>
-			<Timer route={route} />
+			<Timer settings={settings} />
 		</View>
 	);
 };

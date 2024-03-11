@@ -2,18 +2,19 @@ import React, {useState} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {colors} from '@components/colors.ts';
 import {Picker} from '@react-native-picker/picker';
+import {Dropdown} from '@pages/Settings/DropDown/Dropdown.tsx';
 
-export const Settings = ({navigation}: any) => {
+export const Settings = ({onSaveSettings}: any) => {
 	const [workTime, setWorkTime] = useState('20');
 	const [restTime, setRestTime] = useState('5');
 	const [intervals, setIntervals] = useState('4');
 
 	const saveSettings = () => {
-		navigation.navigate('Home', {
-			workTime: parseInt(workTime, 10),
-			restTime: parseInt(restTime, 10),
-			intervals: parseInt(intervals, 10),
-		});
+		onSaveSettings(
+			parseInt(workTime, 10),
+			parseInt(restTime, 10),
+			parseInt(intervals, 10),
+		);
 	};
 	return (
 		<View
@@ -21,59 +22,49 @@ export const Settings = ({navigation}: any) => {
 				flex: 1,
 				backgroundColor: colors.main,
 				paddingHorizontal: 20,
+				paddingTop: 50,
 			}}>
-			<Text style={styles.textPickerTitle}>Work Time (minutes):</Text>
-			<Picker
-				style={styles.picker}
-				itemStyle={styles.textPickerTitle}
-				selectedValue={workTime}
-				onValueChange={(itemValue, itemIndex) => setWorkTime(itemValue)}>
-				{Array.from(Array(7).keys()).map(val => {
-					return (
-						<Picker.Item
-							label={val.toString()}
-							key={`sessionCount ${val}`}
-							value={val}
-						/>
-					);
-				})}
-			</Picker>
+			<Dropdown
+				placeholder={'Work duration: (min.)'}
+				value={workTime}
+				onChange={(itemValue, itemIndex) => setWorkTime(itemValue)}>
+				{[15, 20, 25, 30, 45, 52, 90].map(val => (
+					<Picker.Item
+						label={val.toString()}
+						key={`workDuration ${val}`}
+						value={val}
+					/>
+				))}
+			</Dropdown>
 
-			<Text style={styles.textPickerTitle}>Rest Time (minutes):</Text>
-			<Picker
-				itemStyle={styles.textPickerTitle}
-				selectedValue={restTime}
-				onValueChange={(itemValue, itemIndex) => setRestTime(itemValue)}>
-				<Picker.Item label="1" value="1" />
-				<Picker.Item label="2" value="2" />
-				<Picker.Item label="3" value="3" />
-			</Picker>
+			<Dropdown
+				placeholder={'Rest duration: (min.)'}
+				value={restTime}
+				onChange={(itemValue, itemIndex) => setRestTime(itemValue)}>
+				{[5, 10, 17, 20, 25, 30].map(val => (
+					<Picker.Item
+						label={(val + 1).toString()}
+						key={`breakDuration ${val}`}
+						value={val}
+					/>
+				))}
+			</Dropdown>
 
-			<Text style={styles.textPickerTitle}>Intervals:</Text>
-			<Picker
-				itemStyle={styles.textPickerTitle}
-				selectedValue={intervals}
-				onValueChange={(itemValue, itemIndex) => setIntervals(itemValue)}>
-				<Picker.Item label="1" value="1" />
-				<Picker.Item label="2" value="2" />
-				<Picker.Item label="3" value="3" />
-			</Picker>
-
-			{Array.from(Array(7).keys()).map(val => {
-				return (
+			<Dropdown
+				placeholder={'Intervals:'}
+				value={intervals}
+				onChange={(itemValue, itemIndex) => setIntervals(itemValue)}>
+				{[1, 3, 5, 7].map(val => (
 					<Picker.Item
 						label={val.toString()}
 						key={`sessionCount ${val}`}
 						value={val}
 					/>
-				);
-			})}
+				))}
+			</Dropdown>
 
 			<View style={styles.buttonContainer}>
-				<TouchableOpacity style={styles.cancelButton} onPress={saveSettings}>
-					<Text style={styles.textButton}>Cancel</Text>
-				</TouchableOpacity>
-				<TouchableOpacity style={styles.saveButton}>
+				<TouchableOpacity style={styles.saveButton} onPress={saveSettings}>
 					<Text style={styles.textButton}>Save</Text>
 				</TouchableOpacity>
 			</View>
@@ -85,9 +76,9 @@ const styles = StyleSheet.create({
 	buttonContainer: {
 		width: '100%',
 		paddingHorizontal: 20,
+		paddingTop: 100,
 		display: 'flex',
-		flexDirection: 'row',
-		justifyContent: 'space-between',
+		justifyContent: 'center',
 		alignItems: 'center',
 	},
 	saveButton: {
@@ -98,24 +89,10 @@ const styles = StyleSheet.create({
 		padding: 15,
 		borderRadius: 30,
 	},
-	cancelButton: {
-		justifyContent: 'center',
-		alignItems: 'center',
-		width: 150,
-		padding: 15,
-	},
 	textButton: {
 		color: colors.textWhite,
 		fontSize: 18,
 		fontWeight: '600',
 		letterSpacing: 0.5,
-	},
-	textPickerTitle: {
-		color: colors.textWhite,
-	},
-	picker: {
-		height: 120,
-		overflow: 'hidden',
-		justifyContent: 'center',
 	},
 });
