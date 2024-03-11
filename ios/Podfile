@@ -40,6 +40,7 @@ target 'PomodoroApp' do
   )
 
    pod 'RNSVG', :path => '../node_modules/react-native-svg'
+   pod 'RNCPicker', :path => '../node_modules/@react-native-picker/picker'
    pod 'BVLinearGradient', :path => '../node_modules/react-native-linear-gradient'
 
   target 'PomodoroAppTests' do

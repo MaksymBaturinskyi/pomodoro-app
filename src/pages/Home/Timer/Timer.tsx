@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import Pause from '@icons/pause.svg';
 import Play from '@icons/play.svg';
@@ -6,19 +6,30 @@ import {CountdownCircleTimer} from 'react-native-countdown-circle-timer';
 import {colors} from '@components/colors.ts';
 import {EnumStatus} from '@pages/Home/Timer/timer.interface.ts';
 
-const flowDuration = 1 * 5;
 const sessionCount = 3;
-const breakDuration = 1 * 3;
 
-export const Timer = () => {
+export const Timer = ({route}: any) => {
+	const [flowDuration, setFlowDuration] = useState(1 * 5);
 	const [isPlaying, setIsPlaying] = useState(false);
 	const [currentSession, setCurrentSession] = useState(1);
 	const [key, setKey] = useState(0);
+	const [breakDuration, setBreakDuration] = useState(1 * 3);
 
 	const getStatus = (session: number) => {
 		if (session > sessionCount) return EnumStatus.END;
 		return session % 2 === 0 ? EnumStatus.REST : EnumStatus.WORK;
 	};
+
+	useEffect(() => {
+		if (route.params) {
+			// Get the parameters from the settings screen
+			const {workTime, restTime, intervals} = route.params;
+			// Convert them to seconds
+			setFlowDuration(workTime * 60);
+			setBreakDuration(restTime * 60);
+			setCurrentSession(intervals);
+		}
+	}, [route.params]);
 
 	const startNextSession = () => {
 		if (currentSession <= sessionCount) {
@@ -50,11 +61,11 @@ export const Timer = () => {
 				key={key}
 				isPlaying={isPlaying}
 				duration={duration}
-				colors={['#3A3570', '#ffffff']}
+				colors={['#6c4eb3', '#ffffff']}
 				colorsTime={[flowDuration, 0]}
 				size={300}
 				strokeWidth={10}
-				trailColor={'#2f2f4c'}
+				trailColor={'#6c4eb3'}
 				onUpdate={elapsedTime => {
 					const totalTime = 10 * 60;
 					const progress = (elapsedTime / totalTime) * 100;
@@ -175,7 +186,7 @@ const styles = StyleSheet.create({
 		width: 70,
 		height: 70,
 		padding: 20,
-		backgroundColor: colors.primary,
+		backgroundColor: colors.secondary,
 		borderRadius: 50,
 		zIndex: 1,
 	},
