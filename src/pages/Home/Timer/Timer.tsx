@@ -41,8 +41,6 @@ export const Timer = ({settings}: any) => {
 
 	const isWorkSession = getStatus(currentSession) === EnumStatus.WORK;
 	const duration = isWorkSession ? flowDuration : breakDuration;
-	// const statusText = isWorkSession ? 'WORK' : 'REST';
-	console.log(isWorkSession, 'isWOrkSession');
 	return (
 		<View style={styles.container}>
 			<CountdownCircleTimer
