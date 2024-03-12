@@ -19,6 +19,8 @@ export const Dropdown: FC<PropsWithChildren<IDropDown>> = ({
 		<View>
 			<Text style={styles.textPickerTitle}>{placeholder}</Text>
 			<Picker
+				dropdownIconColor={colors.textWhite}
+				// mode={'dropdown'}
 				style={styles.picker}
 				itemStyle={styles.textPickerTitle}
 				selectedValue={value}
@@ -34,6 +36,7 @@ const styles = StyleSheet.create({
 		color: colors.textWhite,
 	},
 	picker: {
+		color: colors.textWhite,
 		height: 130,
 		overflow: 'hidden',
 		justifyContent: 'center',

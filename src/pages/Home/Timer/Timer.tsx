@@ -7,14 +7,12 @@ import {colors} from '@components/colors.ts';
 import {EnumStatus} from '@pages/Home/Timer/timer.interface.ts';
 
 export const Timer = ({settings}: any) => {
-	// const [flowDuration, setFlowDuration] = useState(settings.workTime);
 	const flowDuration = settings.workTime;
 	const sessionCount = settings.intervals;
 	const breakDuration = settings.restTime;
 	const [isPlaying, setIsPlaying] = useState(false);
 	const [currentSession, setCurrentSession] = useState(1);
 	const [key, setKey] = useState(0);
-	// const [breakDuration, setBreakDuration] = useState(settings.restTime);
 
 	const getStatus = (session: number) => {
 		if (session > sessionCount) return EnumStatus.END;

@@ -3,8 +3,10 @@ import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {colors} from '@components/colors.ts';
 import {Picker} from '@react-native-picker/picker';
 import {Dropdown} from '@pages/Settings/DropDown/Dropdown.tsx';
+import {useNavigation} from '@react-navigation/native';
 
 export const Settings = ({onSaveSettings}: any) => {
+	const {navigate} = useNavigation();
 	const [workTime, setWorkTime] = useState('20');
 	const [restTime, setRestTime] = useState('5');
 	const [intervals, setIntervals] = useState('4');
@@ -15,6 +17,8 @@ export const Settings = ({onSaveSettings}: any) => {
 			parseInt(restTime, 10),
 			parseInt(intervals, 10),
 		);
+		// @ts-ignore
+		navigate('Home');
 	};
 	return (
 		<View
