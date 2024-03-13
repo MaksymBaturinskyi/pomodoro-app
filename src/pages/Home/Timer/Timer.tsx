@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import Pause from '@icons/pause.svg';
 import Play from '@icons/play.svg';
+import Left from '@icons/left-arrow.svg';
+import Right from '@icons/right-arrow.svg';
 import {CountdownCircleTimer} from 'react-native-countdown-circle-timer';
 import {colors} from '@components/colors.ts';
 import {EnumStatus} from '@pages/Home/Timer/timer.interface.ts';
@@ -36,6 +38,22 @@ export const Timer = ({settings}: any) => {
 			setIsPlaying(true);
 		} else {
 			setIsPlaying(prev => !prev);
+		}
+	};
+
+	const onPressLeft = () => {
+		if (currentSession > 1) {
+			setCurrentSession(prev => prev - 1);
+			setKey(prev => prev + 1);
+			setIsPlaying(false);
+		}
+	};
+
+	const onPressRight = () => {
+		if (currentSession <= sessionCount) {
+			setCurrentSession(prev => prev + 1);
+			setKey(prev => prev + 1);
+			setIsPlaying(false);
 		}
 	};
 
@@ -99,9 +117,17 @@ export const Timer = ({settings}: any) => {
 				))}
 			</View>
 
-			<TouchableOpacity style={styles.button} onPress={onPressPlayPause}>
-				{isPlaying ? <Pause /> : <Play />}
-			</TouchableOpacity>
+			<View style={styles.buttonContainer}>
+				<TouchableOpacity style={styles.buttonArrow} onPress={onPressLeft}>
+					<Left />
+				</TouchableOpacity>
+				<TouchableOpacity style={styles.button} onPress={onPressPlayPause}>
+					{isPlaying ? <Pause /> : <Play />}
+				</TouchableOpacity>
+				<TouchableOpacity style={styles.buttonArrow} onPress={onPressRight}>
+					<Right />
+				</TouchableOpacity>
+			</View>
 		</View>
 	);
 };
@@ -153,6 +179,12 @@ const styles = StyleSheet.create({
 		fontSize: 24,
 		marginTop: 20,
 	},
+	buttonContainer: {
+		flexDirection: 'row',
+		width: 100,
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
 	button: {
 		shadowColor: colors.primary,
 		shadowOffset: {
@@ -168,8 +200,13 @@ const styles = StyleSheet.create({
 		width: 70,
 		height: 70,
 		padding: 20,
+		marginHorizontal: 20,
 		backgroundColor: colors.secondary,
 		borderRadius: 50,
 		zIndex: 1,
+	},
+	buttonArrow: {
+		width: 30,
+		height: 30,
 	},
 });
