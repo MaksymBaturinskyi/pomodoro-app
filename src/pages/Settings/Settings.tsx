@@ -47,7 +47,7 @@ export const Settings = ({onSaveSettings}: any) => {
 				onChange={(itemValue, itemIndex) => setRestTime(itemValue)}>
 				{[5, 10, 17, 20, 25, 30].map(val => (
 					<Picker.Item
-						label={(val + 1).toString()}
+						label={val.toString()}
 						key={`breakDuration ${val}`}
 						value={val}
 					/>
